@@ -189,6 +189,7 @@ tbody tr:hover {
     margin-bottom: 40px; /* Space below the help section */
     line-height: 1.6;
     text-align: left; /* Align text within the help section */
+     font-size: 16px; /* <-- Add or change this line */
 }
 
 .help-section h2, .help-section h3, .help-section h4 {
