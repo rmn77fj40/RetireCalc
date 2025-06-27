@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Retirement Planning Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-title">Detailed Retirement Planning Calculator</div>
+
+    <div class="calculator-container">
+
+        <div class="calculator-section">
+            <h3>Personal Information</h3>
+            <div class="input-group">
+                <label for="robBirthDate">Your Birth Date:</label>
+                <input type="date" id="robBirthDate" value="1964-10-04">
+            </div>
+            <div class="input-group">
+                <label for="sonjaBirthDate">Partner's Birth Date:</label>
+                <input type="date" id="sonjaBirthDate" value="1964-02-27">
+            </div>
+            <div class="input-group">
+                <label for="initialSavings">Current Savings/Investments ($):</label>
+                <input type="number" id="initialSavings" value="720000">
+            </div>
+            <div class="input-group">
+                <label for="retirementAge">Your Desired Retirement Age:</label>
+                <input type="number" id="retirementAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="partnerRetirementAge">Partner's Desired Retirement Age:</label>
+                <input type="number" id="partnerRetirementAge" value="62">
+            </div>
+            <div class="input-group">
+                <label for="planToAge">Life Expectancy for Projection (max age):</label>
+                <input type="number" id="planToAge" value="95">
+            </div>
+            <div class="input-group">
+                <label for="overrideCurrentAge">Simulate Your Current Age (Optional):</label>
+                <input type="number" id="overrideCurrentAge" placeholder="Leave blank for actual age">
+            </div>
+            <div class="input-group">
+                <label for="overridePartnerCurrentAge">Simulate Partner's Current Age (Optional):</label>
+                <input type="number" id="overridePartnerCurrentAge" placeholder="Leave blank for actual age">
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Growth & Inflation</h3>
+            <div class="input-group">
+                <label for="averageMarketReturn">Annual Pre-Retirement Growth Rate (%):</label>
+                <input type="number" id="averageMarketReturn" value="7" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="postRetirementGrowthRate">Annual Post-Retirement Growth Rate (%):</label>
+                <input type="number" id="postRetirementGrowthRate" value="6" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="annualInflationRate">Annual Inflation Rate (%):</label>
+                <input type="number" id="annualInflationRate" value="2.5" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="averageEffectiveTaxRate">Income Tax Rate on Withdrawals (%):</label>
+                <input type="number" id="averageEffectiveTaxRate" value="15" step="0.1">
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="calculateInTodayDollars" checked>
+                <label for="calculateInTodayDollars">Calculate in Today's Dollars (Adjust for inflation)</label>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Income & Contributions</h3>
+            <div class="input-group">
+                <label for="monthlyInvestmentContribution">Monthly Investment Contribution ($):</label>
+                <input type="number" id="monthlyInvestmentContribution" value="300">
+            </div>
+            <div class="input-group">
+                <label for="robCurrentSalary">Your Current Annual Salary ($):</label>
+                <input type="number" id="robCurrentSalary" value="50000">
+            </div>
+            <div class="input-group">
+                <label for="sonjaCurrentSalary">Partner's Current Annual Salary ($):</label>
+                <input type="number" id="sonjaCurrentSalary" value="0">
+            </div>
+            <div class="input-group">
+                <label for="salaryGrowthRate">Annual Salary Growth Rate (%):</label>
+                <input type="number" id="salaryGrowthRate" value="1.0" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="robSocialSecurityMonthly">Your Monthly Social Security ($):</label>
+                <input type="number" id="robSocialSecurityMonthly" value="2863">
+            </div>
+            <div class="input-group">
+                <label for="robSocialSecurityStartAge">Your SS Start Age:</label>
+                <input type="number" id="robSocialSecurityStartAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="sonjaSocialSecurityMonthly">Partner's Monthly Social Security ($):</label>
+                <input type="number" id="sonjaSocialSecurityMonthly" value="1707">
+            </div>
+            <div class="input-group">
+                <label for="sonjaSocialSecurityStartAge">Partner's SS Start Age:</label>
+                <input type="number" id="sonjaSocialSecurityStartAge" value="62">
+            </div>
+            <div class="input-group">
+                <label for="otherMonthlyIncome">Other Monthly Income (e.g., pension, annuity) ($):</label>
+                <input type="number" id="otherMonthlyIncome" value="1000">
+            </div>
+            <div class="input-group">
+                <label for="peraAnnualIncreaseRate">Colorado PERA Annual Increase Rate (%):</label>
+                <input type="number" id="peraAnnualIncreaseRate" value="1.0" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="peraAIWaitMonths">Colorado PERA AI Waiting Period (Months after retirement):</label>
+                <input type="number" id="peraAIWaitMonths" value="36">
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Retirement Expenses</h3>
+            <div class="input-group">
+                <label for="monthlyRetirementSpending">Base Living Expenses (Monthly, in today's dollars):</label>
+                <input type="number" id="monthlyRetirementSpending" value="5000">
+            </div>
+            <div class="input-group">
+                <label for="goGoMonthlySpending">Go-Go Monthly Spending (Additional) ($):</label>
+                <input type="number" id="goGoMonthlySpending" value="4000">
+            </div>
+            <div class="input-group">
+                <label for="goGoStartAge">Go-Go Start Age:</label>
+                <input type="number" id="goGoStartAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="goGoEndAge">Go-Go End Age:</label>
+                <input type="number" id="goGoEndAge" value="83">
+            </div>
+
+            <div class="input-group">
+                <label for="goSlowMonthlySpending">Go-Slow Monthly Spending (Additional) ($):</label>
+                <input type="number" id="goSlowMonthlySpending" value="500">
+            </div>
+            <div class="input-group">
+                <label for="goSlowStartAge">Go-Slow Start Age:</label>
+                <input type="number" id="goSlowStartAge" value="84">
+            </div>
+            <div class="input-group">
+                <label for="goSlowEndAge">Go-Slow End Age:</label>
+                <input type="number" id="goSlowEndAge" value="87">
+            </div>
+        </div>
+
+    </div>
+    <div class="button-group">
+        <button onclick="calculateRetirement()">Calculate Retirement</button>
+        <button onclick="exportToCsv()">Export to CSV</button>
+    </div>
+
+    <div class="calculator-container" style="justify-content: unset; max-width: 900px; padding: 0;">
+        <div class="calculator-section summary-results">
+            <h3>Summary Results</h3>
+            <div class="summary-item"><strong>Your Age at End of Plan:</strong> <span id="summaryRobAge">--</span></div>
+            <div class="summary-item"><strong>Partner's Age at End of Plan:</strong> <span id="summarySonjaAge">--</span></div>
+            <div class="summary-item"><strong>Balance at Your Retirement Age:</strong> <span id="balanceAtRobRetirement">--</span></div>
+            <div class="summary-item"><strong>Balance at End of Plan:</strong> <span id="balanceAtEndOfPlan">--</span></div>
+            <div class="summary-item"><strong>First Shortfall Year:</strong> <span id="shortfallYear">--</span></div>
+        </div>
+    </div>
+
+
+    <div class="calculator-container detailed-projection" style="justify-content: unset; padding: 0;">
+        <div class="calculator-section" style="flex: 1 1 100%;">
+            <h3>Detailed Projection</h3>
+            <div class="table-responsive">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Your Age</th>
+                            <th>Partner Age</th>
+                            <th>Savings Start ($)</th>
+                            <th>Contr. ($)</th>
+                            <th>Inv. Growth ($)</th>
+                            <th>SS Inc. ($)</th>
+                            <th>Pension Inc. ($)</th>
+                            <th>Total Inc. ($)</th>
+                            <th>Total Exp. ($)</th>
+                            <th>Total Tax ($)</th>
+                            <th>Withdrawals ($)</th>
+                            <th>Savings End ($)</th>
+                            <th>Shortfall ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
