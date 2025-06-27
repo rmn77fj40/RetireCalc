@@ -47,8 +47,8 @@ body {
 .input-group label {
     flex-basis: 60%; /* Label takes more width */
     text-align: left; /* Align labels left within their space */
-    font-weight: bold; /* Normal weight for labels */
-    color: #555;
+    font-weight: normal; /* Normal weight for labels */
+    color: #333;
     line-height: 1.3;
 }
 .input-group input[type="number"],
