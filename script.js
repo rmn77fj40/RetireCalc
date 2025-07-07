@@ -7,27 +7,27 @@ function parseDate(dateString) {
 
 // Global constants for 2024 tax year (adjust as needed for future years)
 const FEDERAL_TAX_BRACKETS_SINGLE = [
-    { income: 11600, rate: 0.10 },
-    { income: 47150, rate: 0.12 },
-    { income: 100525, rate: 0.22 },
-    { income: 191950, rate: 0.24 },
-    { income: 243725, rate: 0.32 },
-    { income: 609350, rate: 0.35 },
+    { income: 11925, rate: 0.10 }, // Was 11600
+    { income: 48475, rate: 0.12 }, // Was 47150
+    { income: 103350, rate: 0.22 }, // Was 100525
+    { income: 197300, rate: 0.24 }, // Was 191950
+    { income: 250525, rate: 0.32 }, // Was 243725
+    { income: 626350, rate: 0.35 }, // Was 609350
     { income: Infinity, rate: 0.37 }
 ];
 
 const FEDERAL_TAX_BRACKETS_MARRIED_JOINTLY = [
-    { income: 23200, rate: 0.10 },
-    { income: 94300, rate: 0.12 },
-    { income: 201050, rate: 0.22 },
-    { income: 383900, rate: 0.24 },
-    { income: 487450, rate: 0.32 },
-    { income: 731200, rate: 0.35 },
+    { income: 23850, rate: 0.10 }, // Was 23200
+    { income: 96950, rate: 0.12 }, // Was 94300
+    { income: 206700, rate: 0.22 }, // Was 201050
+    { income: 394600, rate: 0.24 }, // Was 383900
+    { income: 501050, rate: 0.32 }, // Was 487450
+    { income: 751600, rate: 0.35 }, // Was 731200
     { income: Infinity, rate: 0.37 }
 ];
 
-const STANDARD_DEDUCTION_SINGLE = 14600;
-const STANDARD_DEDUCTION_MARRIED_JOINTLY = 29200;
+const STANDARD_DEDUCTION_SINGLE = 15750;
+const STANDARD_DEDUCTION_MARRIED_JOINTLY = 31500;
 
 // IMPORTANT: Updated for 2024 tax year and 2025 proposed
 // For 2024, it was 4.25%. For 2025 onwards, it's projected to be 4.0% by current legislation.
