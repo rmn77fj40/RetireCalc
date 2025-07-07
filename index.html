@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detailed Retirement Planning Calculator</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
     <div class="main-title">Detailed Retirement Planning Calculator</div>
@@ -213,27 +214,27 @@
                 <li><strong>Calculate Expenses:</strong> Sums `Base Living Expenses` and `Go-Go`/`Go-Slow` additional spending (if within age ranges), all inflated.</li>
                 <li><strong>Calculate Taxes:</strong> This is a key step where federal income tax and Social Security benefit taxation are estimated.
                     <ul>
-                        <li><strong>Federal Income Tax:</strong> The calculator determines your federal income tax liability by applying the <strong>2024 IRS federal income tax brackets and standard deductions</strong>.
+                        <li><strong>Federal Income Tax:</strong> The calculator determines your federal income tax liability by applying the **2025 IRS federal income tax brackets and standard deductions, as permanently extended by the One Big Beautiful Bill Act (OBBBA)**.
                             <br>Your taxable income is derived from various sources, including salaries, pensions, and the taxable portion of Social Security benefits.
-                            <br>Before applying tax brackets, the calculator will subtract the appropriate 2024 standard deduction based on your chosen filing status:
+                            <br>Before applying tax brackets, the calculator will subtract the appropriate 2025 standard deduction based on your chosen filing status:
                             <ul>
-                                <li><strong>Single:</strong> $14,600</li>
-                                <li><strong>Married Filing Jointly:</strong> $29,200</li>
+                                <li><strong>Single:</strong> $15,750</li>
+                                <li><strong>Married Filing Jointly:</strong> $31,500</li>
                             </ul>
-                            After applying the standard deduction, your remaining taxable income is subjected to the progressive tax rate system.
+                            After applying the standard deduction, your remaining taxable income is subjected to the progressive tax rate system:
                             <ul>
-                                <li><strong>For Single Filers:</strong> 10% up to $11,600; 12% on income between $11,601 and $47,150; 22% on income between $47,151 and $100,525; 24% on income between $100,526 and $191,950; 32% on income between $191,951 and $243,725; 35% on income between $243,726 and $609,350; 37% on income over $609,350.</li>
-                                <li><strong>For Married Filing Jointly:</strong> 10% up to $23,200; 12% on income between $23,201 and $94,300; 22% on income between $94,301 and $201,050; 24% on income between $201,051 and $383,900; 32% on income between $383,901 and $487,450; 35% on income between $487,451 and $731,200; 37% on income over $731,200.</li>
+                                <li><strong>For Single Filers:</strong> 10% up to $11,925; 12% on income between $11,926 and $48,475; 22% on income between $48,476 and $103,350; 24% on income between $103,351 and $197,300; 32% on income between $197,301 and $250,525; 35% on income between $250,526 and $626,350; 37% on income over $626,350.</li>
+                                <li><strong>For Married Filing Jointly:</strong> 10% up to $23,850; 12% on income between $23,851 and $96,950; 22% on income between $96,951 and $206,700; 24% on income between $206,701 and $394,600; 32% on income between $394,601 and $501,050; 35% on income between $501,051 and $751,600; 37% on income over $751,600.</li>
                             </ul>
                         </li>
                         <li><strong>Social Security Benefit Taxation:</strong> The calculator employs the IRS's "combined income" rules to determine the taxable portion of your Social Security benefits. "Combined income" is generally defined as your Adjusted Gross Income (AGI) + any nontaxable interest + one-half of your Social Security benefits.
-                            <br>Here are the 2024 thresholds:
+                            <br>Here are the currently applicable thresholds:
                             <ul>
                                 <li><strong>For Single Filers:</strong> If combined income is below $25,000, none taxable; between $25,000 and $34,000, up to 50% taxable; above $34,000, up to 85% taxable.</li>
                                 <li><strong>For Married Filing Jointly:</strong> If combined income is below $32,000, none taxable; between $32,000 and $44,000, up to 50% taxable; above $44,000, up to 85% taxable.</li>
                             </ul>
                         </li>
-                        <li><strong>Colorado State Income Tax:</strong> Colorado has a flat state income tax rate of <strong>4.25%</strong> (for 2024). This rate is applied to your total taxable ordinary income before federal deductions. Colorado also offers a retirement income deduction: up to $20,000 for individuals aged 55-64, and up to $24,000 for individuals aged 65 or older.</li>
+                        <li><strong>Colorado State Income Tax:</strong> Colorado has a flat state income tax rate of **4.25% for 2024, decreasing to 4.0% for 2025 onwards**. This rate is applied to your total taxable ordinary income before federal deductions. Colorado also offers a retirement income deduction: up to $20,000 for individuals aged 55-64, and up to $24,000 for individuals aged 65 or older.</li>
                     </ul>
                 </li>
                 <li><strong>Investment Growth:</strong> Applies the determined annual growth rate to the beginning balance for the year.</li>
@@ -248,11 +249,11 @@
                 <li><strong>Today's Dollars vs. Nominal Dollars:</strong> Crucial for interpreting results; "Today's Dollars" adjusts for purchasing power.</li>
                 <li><strong>Tax Model:</strong>
                     <ul>
-                        <li>Uses **2024 Federal Income Tax Brackets and Standard Deductions** for Single and Married Filing Jointly statuses.</li>
-                        <li>Incorporates **Social Security benefit taxation rules**, where a portion of SS benefits may become taxable based on "combined income" thresholds.</li>
-                        <li>Includes **Colorado State Income Tax** at a flat rate, factoring in the retirement income deduction.</li>
+                        <li>Uses **2025 Federal Income Tax Brackets and Standard Deductions** (as detailed above) for Single and Married Filing Jointly statuses.</li>
+                        <li>Incorporates **Social Security benefit taxation rules** (as detailed above), where a portion of SS benefits may become taxable based on "combined income" thresholds.</li>
+                        <li>Includes **Colorado State Income Tax** at a flat rate, factoring in the retirement income deduction, with the rate adjusting for 2025 onwards.</li>
                         <li>**Capital gains taxes, and other specific deductions/credits are NOT included.** This calculator provides an estimation of income tax liability. Consult a tax professional for precise tax planning.</li>
-                        </ul>
+                    </ul>
                 </li>
                 <li><strong>No Inter-year Compounding:</strong> Growth and flows are modeled annually.</li>
                 <li><strong>PERA AI Logic:</strong> Specific logic for Colorado PERA pension increases after a waiting period.</li>
