@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Retirement Planning Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-title">Detailed Retirement Planning Calculator</div>
+
+    <div class="button-group help-button-container">
+        <button onclick="toggleHelpSection()">Help / Documentation</button>
+    </div>
+
+    <div class="calculator-container">
+
+        <div class="calculator-section">
+            <h3>Personal Information</h3>
+            <div class="input-group">
+                <label for="robBirthDate">Your Birth Date:</label>
+                <input type="date" id="robBirthDate" value="1964-10-04">
+            </div>
+            <div class="input-group">
+                <label for="sonjaBirthDate">Partner's Birth Date:</label>
+                <input type="date" id="sonjaBirthDate" value="1964-02-27">
+            </div>
+            <div class="input-group">
+                <label for="initialSavings">Current Savings/Investments ($):</label>
+                <input type="number" id="initialSavings" value="720000">
+            </div>
+            <div class="input-group">
+                <label for="retirementAge">Your Desired Retirement Age:</label>
+                <input type="number" id="retirementAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="partnerRetirementAge">Partner's Desired Retirement Age:</label>
+                <input type="number" id="partnerRetirementAge" value="62">
+            </div>
+            <div class="input-group">
+                <label for="planToAge">Life Expectancy for Projection (max age):</label>
+                <input type="number" id="planToAge" value="95">
+            </div>
+            <div class="input-group">
+                <label for="overrideCurrentAge">Simulate Your Current Age (Optional):</label>
+                <input type="number" id="overrideCurrentAge" placeholder="Leave blank for actual age">
+            </div>
+            <div class="input-group">
+                <label for="overridePartnerCurrentAge">Simulate Partner's Current Age (Optional):</label>
+                <input type="number" id="overridePartnerCurrentAge" placeholder="Leave blank for actual age">
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Growth & Inflation</h3>
+            <div class="input-group">
+                <label for="averageMarketReturn">Annual Pre-Retirement Growth Rate (%):</label>
+                <input type="number" id="averageMarketReturn" value="7" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="postRetirementGrowthRate">Annual Post-Retirement Growth Rate (%):</label>
+                <input type="number" id="postRetirementGrowthRate" value="6" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="annualInflationRate">Annual Inflation Rate (%):</label>
+                <input type="number" id="annualInflationRate" value="2.5" step="0.1">
+            </div>
+             <div class="input-group">
+                <label for="filingStatus">Tax Filing Status:</label>
+                <select id="filingStatus">
+                    <option value="marriedJointly">Married Filing Jointly</option>
+                    <option value="single">Single</option>
+                </select>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="calculateInTodayDollars" checked>
+                <label for="calculateInTodayDollars">Calculate in Today's Dollars (Adjust for inflation)</label>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Income & Contributions</h3>
+            <div class="input-group">
+                <label for="monthlyInvestmentContribution">Monthly Investment Contribution ($):</label>
+                <input type="number" id="monthlyInvestmentContribution" value="300">
+            </div>
+            <div class="input-group">
+                <label for="robCurrentSalary">Your Current Annual Salary ($):</label>
+                <input type="number" id="robCurrentSalary" value="50000">
+            </div>
+            <div class="input-group">
+                <label for="salaryGrowthRate">Annual Salary Growth Rate (%):</label>
+                <input type="number" id="salaryGrowthRate" value="1.0" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="sonjaCurrentSalary">Partner's Current Annual Salary ($):</label>
+                <input type="number" id="sonjaCurrentSalary" value="0">
+            </div>
+            <div class="input-group">
+                <label for="robSocialSecurityMonthly">Your Monthly Social Security ($):</label>
+                <input type="number" id="robSocialSecurityMonthly" value="2863">
+            </div>
+            <div class="input-group">
+                <label for="robSocialSecurityStartAge">Your SS Start Age:</label>
+                <input type="number" id="robSocialSecurityStartAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="sonjaSocialSecurityMonthly">Partner's Monthly Social Security ($):</label>
+                <input type="number" id="sonjaSocialSecurityMonthly" value="1707">
+            </div>
+            <div class="input-group">
+                <label for="sonjaSocialSecurityStartAge">Partner's SS Start Age:</label>
+                <input type="number" id="sonjaSocialSecurityStartAge" value="62">
+            </div>
+            <div class="input-group">
+                <label for="otherMonthlyIncome">Other Monthly Income (e.g., pension, annuity) ($):</label>
+                <input type="number" id="otherMonthlyIncome" value="1000">
+            </div>
+            <div class="input-group">
+                <label for="peraAnnualIncreaseRate">Colorado PERA Annual Increase Rate (%):</label>
+                <input type="number" id="peraAnnualIncreaseRate" value="1.0" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="peraAIWaitMonths">Colorado PERA AI Waiting Period (Months after retirement):</label>
+                <input type="number" id="peraAIWaitMonths" value="36">
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Retirement Expenses</h3>
+            <div class="input-group">
+                <label for="monthlyRetirementSpending">Base Living Expenses (Monthly, in today's dollars):</label>
+                <input type="number" id="monthlyRetirementSpending" value="5000">
+            </div>
+            <div class="input-group">
+                <label for="goGoMonthlySpending">Go-Go Monthly Spending (Additional) ($):</label>
+                <input type="number" id="goGoMonthlySpending" value="3500">
+            </div>
+            <div class="input-group">
+                <label for="goGoStartAge">Go-Go Start Age:</label>
+                <input type="number" id="goGoStartAge" value="65">
+            </div>
+            <div class="input-group">
+                <label for="goGoEndAge">Go-Go End Age:</label>
+                <input type="number" id="goGoEndAge" value="83">
+            </div>
+
+            <div class="input-group">
+                <label for="goSlowMonthlySpending">Go-Slow Monthly Spending (Additional) ($):</label>
+                <input type="number" id="goSlowMonthlySpending" value="500">
+            </div>
+            <div class="input-group">
+                <label for="goSlowStartAge">Go-Slow Start Age:</label>
+                <input type="number" id="goSlowStartAge" value="84">
+            </div>
+            <div class="input-group">
+                <label for="goSlowEndAge">Go-Slow End Age:</label>
+                <input type="number" id="goSlowEndAge" value="87">
+            </div>
+        </div>
+
+    </div>
+    <div class="button-group">
+        <button id="calculateBtn">Calculate Retirement</button>
+        <button id="exportCsvBtn">Export to CSV</button>
+    </div>
+
+    <div class="calculator-container" style="justify-content: unset; max-width: 900px; padding: 0;">
+        <div class="calculator-section summary-results">
+            <h3>Summary Results</h3>
+            <div class="summary-item"><strong>Your Age at End of Plan:</strong> <span id="summaryRobAge">--</span></div>
+            <div class="summary-item"><strong>Partner's Age at End of Plan:</strong> <span id="summarySonjaAge">--</span></div>
+            <div class="summary-item"><strong>Balance at Your Retirement Age:</strong> <span id="balanceAtRobRetirement">--</span></div>
+            <div class="summary-item"><strong>Balance at End of Plan:</strong> <span id="balanceAtEndOfPlan">--</span></div>
+            <div class="summary-item"><strong>First Shortfall Year:</strong> <span id="shortfallYear">--</span></div>
+        </div>
+    </div>
+
+    <div id="helpSection" class="calculator-container help-section" style="display: none;">
+        <div class="calculator-section" style="flex: 1 1 100%;">
+            <h2>Calculator Help & Assumptions</h2>
+            <p>This retirement projection calculator helps you visualize your financial future by estimating your savings, income, and expenses over time. It provides a year-by-year breakdown to help you understand your retirement readiness.</p>
+
+            <h3>How to Use the Calculator:</h3>
+            <ol>
+                <li><strong>Enter Your Personal Data:</strong> Fill in your and your partner's birth dates, current savings, desired retirement ages, and the age you wish to project until.</li>
+                <li><strong>Define Your Investment Strategy:</strong> Input your pre-retirement and post-retirement growth rates, and any monthly investment contributions.</li>
+                <li><strong>Account for Inflation & Salary:</strong> Provide an annual inflation rate, your current salaries, and expected salary growth.</li>
+                <li><strong>Estimate Retirement Income:</strong> Enter your and your partner's expected Social Security monthly benefits and the age you plan to start receiving them. Include any other fixed monthly income (e.g., pensions, annuities) and details about their increase.</li>
+                <li><strong>Plan Your Spending:</strong> Input your base monthly retirement spending. Optionally, add "Go-Go" and "Go-Slow" spending phases for periods where your expenses might differ.</li>
+                <li><strong>Choose Tax Filing Status:</strong> Select 'single' or 'married jointly' for federal tax calculations.</li>
+                <li><strong>"Today's Dollars" Option:</strong> Check this box if you want all monetary values in the results table to be adjusted for inflation, showing their equivalent purchasing power in today's dollars. If unchecked, values will be in nominal (future) dollars.</li>
+                <li><strong>Click "Calculate":</strong> View your projected financial timeline.</li>
+            </ol>
+
+            <h3>Key Assumptions & Calculations:</h3>
+            <ul>
+                <li><strong>Inflation:</strong> All income and expense values (except initial salaries and fixed monthly investment contributions) are adjusted annually by the specified inflation rate to reflect their nominal (future) dollar value for that year. If "Calculate in Today's Dollars" is selected, these nominal values are then de-inflated for display.</li>
+                <li><strong>Investment Growth:</strong>
+                    <ul>
+                        <li>Pre-Retirement: Your "Average Market Return" is applied annually to your savings balance.</li>
+                        <li>Post-Retirement: Your "Post-Retirement Growth Rate" is applied annually to your savings balance.</li>
+                        <li>Contributions are assumed to be made at the beginning of each year and grow with the balance.</li>
+                    </ul>
+                </li>
+                <li><strong>Salary Growth:</strong> Salaries grow by the specified percentage annually until the respective retirement ages.</li>
+                <li><strong>Social Security:</strong> Social Security benefits start at the specified age and increase annually by the inflation rate.</li>
+                <li><strong>Other Income (Pension/Annuity):</strong>
+                    <ul>
+                        <li>If an "Other Monthly Income" is entered, it is assumed to be a pension or annuity starting at your (Rob's) retirement age.</li>
+                        <li>It initially inflates with the general inflation rate.</li>
+                        <li>If Colorado PERA Annual Increase Rate is provided, after the specified "PERA AI Waiting Period (Months)", the pension will compound at the PERA AI rate instead of the general inflation rate. The PERA AI will apply to the nominal value of the pension at the time it starts receiving PERA AI.</li>
+                    </ul>
+                </li>
+                <li><strong>Spending Phases:</strong> "Go-Go" and "Go-Slow" spending are added *on top* of your base monthly retirement spending during the specified age ranges. All spending amounts inflate annually.</li>
+                <li><strong>Tax Calculations:</strong>
+                    <ul>
+                        <li><strong>Federal Income Tax:</strong> Calculated based on standard **2025 federal tax brackets and standard deductions**. Withdrawals from savings/investments are considered taxable income.
+                            <br>Before applying tax brackets, the calculator will subtract the appropriate 2025 standard deduction based on your chosen filing status:
+                            <ul>
+                                <li><strong>Single:</strong> $15,750</li>
+                                <li><strong>Married Filing Jointly:</strong> $31,500</li>
+                            </ul>
+                            After applying the standard deduction, your remaining taxable income is subjected to the progressive tax rate system:
+                            <ul>
+                                <li><strong>For Single Filers:</strong> 10% up to $11,925; 12% on income between $11,926 and $48,475; 22% on income between $48,476 and $103,350; 24% on income between $103,351 and $197,300; 32% on income between $197,301 and $250,525; 35% on income between $250,526 and $626,350; 37% on income over $626,350.</li>
+                                <li><strong>For Married Filing Jointly:</strong> 10% up to $23,850; 12% on income between $23,851 and $96,950; 22% on income between $96,951 and $206,700; 24% on income between $206,701 and $394,600; 32% on income between $394,601 and $501,050; 35% on income between $501,051 and $751,600; 37% on income over $751,600.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Social Security Benefit Taxation:</strong> The calculator employs the IRS's "combined income" rules to determine the taxable portion of your Social Security benefits. "Combined income" is generally defined as your Adjusted Gross Income (AGI) + any nontaxable interest + one-half of your Social Security benefits.
+                            <br>Here are the currently applicable thresholds:
+                            <ul>
+                                <li><strong>For Single Filers:</strong> If combined income is below $25,000, none taxable; between $25,000 and $34,000, up to 50% taxable; above $34,000, up to 85% taxable.</li>
+                                <li><strong>For Married Filing Jointly:</strong> If combined income is below $32,000, none taxable; between $32,000 and $44,000, up to 50% taxable; above $44,000, up to 85% taxable.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Colorado State Income Tax (Updated Logic):</strong>
+                            <ul>
+                                <li>A flat state income tax rate of **4.25%** is applied for all projection years.</li>
+                                <li>For individuals aged 65 and older, **all federally taxable Social Security benefits are fully deducted** from the income subject to Colorado state tax.</li>
+                                <li>A general retirement income deduction (up to $20,000 for ages 55-64, or up to $24,000 for ages 65+) is applied *after* the Social Security deduction (if applicable).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tax on Withdrawals:</strong> If your income (salary, SS, pension) is insufficient to cover expenses and taxes, the calculator assumes you withdraw from savings to cover the deficit. These withdrawals are treated as taxable income and are factored into both federal and state tax calculations. An iterative process is used to account for the tax on the withdrawals themselves.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Interpreting the Results Table:</h3>
+            <ul>
+                <li><strong>Year, Your Age, Partner Age:</strong> The current year and the age of each individual.</li>
+                <li><strong>Savings Start ($):</strong> Your total savings/investment balance at the beginning of the year.</li>
+                <li><strong>Contrib. ($):</strong> Your annual investment contributions for the year.</li>
+                <li><strong>Inv. Growth ($):</strong> The growth (or loss) from your investments during the year.</li>
+                <li><strong>Social Security Income ($):</strong> Total Social Security benefits received for the year.</li>
+                <li><strong>Pension Income ($):</strong> Any other annual income (e.g., pension, annuity) received.</li>
+                <li><strong>Total Income ($):</strong> Sum of all income sources (salary, SS, pension, and any withdrawals taken from savings to cover deficit).</li>
+                <li><strong>Total Exp. ($):</strong> Your total estimated annual spending for the year.</li>
+                <li><strong>Total Tax ($):</strong> Sum of estimated Federal and Colorado State income taxes for the year.</li>
+                <li><strong>Withdrawals ($):</strong> Amount withdrawn from your savings to cover any deficit in income vs. expenses/taxes.</li>
+                <li><strong>Savings End ($):</strong> Your total savings/investment balance at the end of the year.</li>
+                <li><strong>Shortfall ($):</strong> The amount by which your expenses exceed your available income and savings, indicating you've run out of funds. Rows with a shortfall are highlighted.</li>
+            </ul>
+
+            <h3>Important Considerations:</h3>
+            <ul>
+                <li>This calculator provides a **projection**, not a guarantee. Actual returns, inflation, and tax laws may vary.</li>
+                <li>It does not account for specific investment types (e.g., Roth vs. Traditional accounts), capital gains taxes on investment sales, or other specific deductions beyond the standard deduction and retirement income deductions.</li>
+                <li>Healthcare costs in retirement are highly variable and are included in your "Base Living Expenses." Consider these carefully.</li>
+                <li>Future tax laws (federal and state) are subject to change. The rates and rules used are based on current available information for 2025.</li>
+                <li>This calculator does not perform complex "Monte Carlo" simulations, which account for market volatility and sequence of returns risk.</li>
+            </ul>
+            <p>Always consult with a qualified financial advisor for personalized advice.</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="toggleHelpSection()">Close Help</button>
+            </div>
+        </div>
+    </div>
+    <div class="calculator-container detailed-projection" style="justify-content: unset; padding: 0;">
+        <div class="calculator-section" style="flex: 1 1 100%;">
+            <h3>Detailed Projection</h3>
+            <div class="table-responsive">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Your Age</th>
+                            <th>Partner Age</th>
+                            <th>Savings Start ($)</th>
+                            <th>Contrib. ($)</th>
+                            <th>Inv. Growth ($)</th>
+                            <th>Social Security Income ($)</th>
+                            <th>Pension Income ($)</th>
+                            <th>Total Income ($)</th>
+                            <th>Total Exp. ($)</th>
+                            <th>Total Tax ($)</th>
+                            <th>Withdrawals ($)</th>
+                            <th>Savings End ($)</th>
+                            <th>Shortfall ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
