@@ -306,76 +306,51 @@ function calculateRetirement() {
         let annualColoradoStateTaxes = calculateColoradoStateTax(initialTotalGrossIncomeNominal, robAge, sonjaAge, year, initialTaxableSocialSecurityFederal);
         let totalAnnualTax = annualFederalTaxes + annualColoradoStateTaxes;
 
-        // Calculate the cash flow *before* any withdrawals from savings
+        // --- SIMPLIFIED WITHDRAWAL AND TAX LOGIC (PRE-RMD, PRE-ITERATIVE) ---
         let cashFlowBeforeWithdrawals = initialTotalGrossIncomeNominal + annualContribution - inflatedAnnualSpending - totalAnnualTax;
 
         let withdrawalsToCoverDeficit = 0;
-        let finalFederalTaxableIncome = initialTaxableIncomeFederal;
-        let finalColoradoTaxableIncome = initialTotalGrossIncomeNominal;
+        let actualWithdrawalsForDisplay = 0;
+        let shortfall = 0;
 
-        // If there's a deficit, we need to take withdrawals, and these withdrawals are now taxable
         if (cashFlowBeforeWithdrawals < 0) {
-            let deficit = Math.abs(cashFlowBeforeWithdrawals);
-            let iterations = 0;
-            const MAX_ITERATIONS = 5; // To prevent infinite loops in complex tax calculations
+            // Initial deficit based on current income and taxes
+            withdrawalsToCoverDeficit = Math.abs(cashFlowBeforeWithdrawals);
 
-            // Iteratively calculate withdrawals and re-evaluate taxes
-            while (iterations < MAX_ITERATIONS) {
-                // Add the deficit to the taxable income for this iteration
-                let incomeWithPotentialWithdrawalsFederal = initialTaxableIncomeFederal + deficit; // deficit is our current estimate of withdrawals
-                let taxableSSWithPotentialWithdrawals = calculateTaxableSocialSecurity(totalSocialSecurityIncome, incomeWithPotentialWithdrawalsFederal, filingStatus);
-                let totalFederalTaxBase = currentYearRobSalary + currentYearSonjaSalary + currentYearPensionIncome + deficit + taxableSSWithPotentialWithdrawals;
+            // Re-calculate taxes assuming these withdrawals are also taxable
+            let estimatedTaxableIncomeFederal = initialTaxableIncomeFederal + withdrawalsToCoverDeficit;
+            let estimatedTaxableSocialSecurityFederal = calculateTaxableSocialSecurity(totalSocialSecurityIncome, estimatedTaxableIncomeFederal, filingStatus);
+            let estimatedTotalFederalTaxBase = currentYearRobSalary + currentYearSonjaSalary + currentYearPensionIncome + withdrawalsToCoverDeficit + estimatedTaxableSocialSecurityFederal;
 
-                let incomeWithPotentialWithdrawalsCO = initialTotalGrossIncomeNominal + deficit;
+            let estimatedTotalGrossIncomeNominal = initialTotalGrossIncomeNominal + withdrawalsToCoverDeficit;
 
-                let newFederalTax = calculateFederalIncomeTax(totalFederalTaxBase, filingStatus);
-                // MODIFIED: Pass federally taxable SS to Colorado tax calculation within loop
-                let newColoradoTax = calculateColoradoStateTax(incomeWithPotentialWithdrawalsCO, robAge, sonjaAge, year, taxableSSWithPotentialWithdrawals);
-                let newTotalTax = newFederalTax + newColoradoTax;
+            let newFederalTax = calculateFederalIncomeTax(estimatedTotalFederalTaxBase, filingStatus);
+            let newColoradoTax = calculateColoradoStateTax(estimatedTotalGrossIncomeNominal, robAge, sonjaAge, year, estimatedTaxableSocialSecurityFederal);
+            let newTotalTax = newFederalTax + newColoradoTax;
 
-                let newDeficit = (inflatedAnnualSpending + newTotalTax) - (initialTotalGrossIncomeNominal + annualContribution);
-
-                // If the new deficit is very close to the old one, we've converged
-                if (Math.abs(newDeficit - deficit) < 0.01) { // Check for convergence
-                    withdrawalsToCoverDeficit = Math.max(0, newDeficit); // Ensure non-negative
-                    totalAnnualTax = newTotalTax; // Use the converged tax
-                    finalFederalTaxableIncome = totalFederalTaxBase;
-                    finalColoradoTaxableIncome = incomeWithPotentialWithdrawalsCO;
-                    break;
-                }
-                deficit = newDeficit; // Use the new deficit for the next iteration
-                iterations++;
-
-                // If max iterations reached without convergence, use the last calculated deficit/tax
-                if (iterations === MAX_ITERATIONS) {
-                    withdrawalsToCoverDeficit = Math.max(0, deficit);
-                    totalAnnualTax = newTotalTax;
-                    finalFederalTaxableIncome = totalFederalTaxBase;
-                    finalColoradoTaxableIncome = incomeWithPotentialWithdrawalsCO;
-                }
-            }
+            // Adjust withdrawals to cover expenses + *new* taxes
+            withdrawalsToCoverDeficit = (inflatedAnnualSpending + newTotalTax) - (initialTotalGrossIncomeNominal + annualContribution);
+            
+            // Ensure withdrawals are not negative and update totalAnnualTax for display
+            withdrawalsToCoverDeficit = Math.max(0, withdrawalsToCoverDeficit);
+            totalAnnualTax = newTotalTax; // Use the re-calculated tax
         }
 
         // --- Final Cash Flow and Savings Update ---
         let investmentGrowthAmount = savingsAtBeginningOfYear * annualGrowthRate;
         let currentSavingsBeforeSpendingAndTaxes = savingsAtBeginningOfYear + investmentGrowthAmount + annualContribution;
 
-        let actualWithdrawalsForDisplay = 0;
-        let shortfall = 0;
-
-        // If currentSavingsBeforeSpendingAndTaxes cannot cover the required withdrawals + taxes + expenses:
-        let cashNeededFromSavings = withdrawalsToCoverDeficit; // This is the amount we need to take from savings to cover the initial deficit plus tax on that withdrawal.
-
-        if (cashNeededFromSavings > currentSavingsBeforeSpendingAndTaxes) {
+        // If currentSavingsBeforeSpendingAndTaxes cannot cover the required withdrawals:
+        if (withdrawalsToCoverDeficit > currentSavingsBeforeSpendingAndTaxes) {
             // Not enough savings to cover the required withdrawals
             actualWithdrawalsForDisplay = currentSavingsBeforeSpendingAndTaxes; // Withdraw everything available
-            shortfall = cashNeededFromSavings - currentSavingsBeforeSpendingAndTaxes;
+            shortfall = withdrawalsToCoverDeficit - currentSavingsBeforeSpendingAndTaxes;
             currentSavings = 0; // Savings depleted
             if (firstShortfallYear === '--') {
                 firstShortfallYear = year;
             }
         } else {
-            actualWithdrawalsForDisplay = cashNeededFromSavings;
+            actualWithdrawalsForDisplay = withdrawalsToCoverDeficit;
             currentSavings = currentSavingsBeforeSpendingAndTaxes - actualWithdrawalsForDisplay;
         }
 
