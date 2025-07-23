@@ -30,7 +30,7 @@ const STANDARD_DEDUCTION_SINGLE = 15750;
 const STANDARD_DEDUCTION_MARRIED_JOINTLY = 31500;
 
 // MODIFIED: Single flat Colorado State Tax Rate
-const COLORADO_STATE_TAX_RATE = 0.0425; // Flat 4.25% for all years
+const COLORADO_STATE_TAX_RATE = 0.044; // Flat 4.40% for all years
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('calculateBtn').addEventListener('click', calculateRetirement);
